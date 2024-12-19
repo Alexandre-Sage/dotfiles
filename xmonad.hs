@@ -11,6 +11,7 @@ import XMonad
 import XMonad.Config.Azerty
 import XMonad.Util.Run
 import XMonad.Layout.Spacing
+import XMonad.Actions.CycleWS
 import Data.Monoid
 import System.Exit
 
@@ -120,7 +121,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_l     ), sendMessage Expand)
 
     -- Push window back into tiling
-    , ((modm .|. shiftMask,               xK_t     ), withFocused $ windows . W.sink)
+    , ((modm .|. shiftMask, xK_t     ), withFocused $ windows . W.sink)
 
     -- Increment the number of windows in the master area
     , ((modm              , xK_comma ), sendMessage (IncMasterN 1))
@@ -142,6 +143,12 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
     , ((modm .|. shiftMask, xK_h ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
+    -- Cycle
+    , ((modm .|. controlMask,               xK_Right),  nextWS)
+    , ((modm .|. controlMask,               xK_Left),    prevWS)
+    , ((modm .|. shiftMask, xK_Right),  shiftToNext)
+    , ((modm .|. shiftMask, xK_Left),    shiftToPrev)
+    , ((modm,               xK_z),     toggleWS)
     ]
     ++
 

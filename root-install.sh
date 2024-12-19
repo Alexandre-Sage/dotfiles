@@ -1,7 +1,11 @@
 #!/bin/bash
+
+if [ ! -e "/etc/fstab" ]; then
+	echo "Error: /etc/fstab not found"
+	exit 1
+fi
+
 user="arch-linux"
-install_node=false
-install_rust=false
 enable_docker=false
 virtual_box=false
 install_grub=false
@@ -10,12 +14,6 @@ while getopts "u:r:n:d:v" opt; do
   case "$opt" in
 	u)
 	  user="$OPTARG"
-	  ;;
-	r)
-	  install_rust=true
-	  ;;
-	n)
-	  install_node=true
 	  ;;
 	d)
       	  enable_docker=true
@@ -57,20 +55,20 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /usr/share/zs
 
 setfacl -m g:wheel:rwx ./
 
+mkdir /root/.config /root/.xmonad
+
+git clone https://github.com/Alexandre-Sage/nvim.git /root/.config/nvim
 useradd -m -G $groups -s /bin/zsh $user
 
-ln -s ./.xmonad ~/.xmonad
-ln -s ./.xinit ~/.xinit
-ln -s ./.zshrc ~/.zshrc 
-ln -s ./.xmonad /home/$user/.xmonad
-ln -s ./.xinit /home/$user/.xinit
-ln -s ./.zshrc /home/$user/.zshrc 
+ln -s ./xmonad.hs /root/.xmonad/xmonad.hs
+ln -s ./.xinit /root/.xinit
+ln -s ./.zshrc /root/.zshrc 
 
 
 
-sudo systemctl enable --now dhcpcd
+sudo systemctl enable  dhcpcd
 
 if $enable_docker; then
 	echo "enable docker"
-	sudo systemctl enable --now docker
+	sudo systemctl enable  docker
 fi 
