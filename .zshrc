@@ -1,3 +1,7 @@
+# if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+#   exec startx
+# fi
+
 setxkbmap fr 
 fastfetch
 autoload -U promptinit

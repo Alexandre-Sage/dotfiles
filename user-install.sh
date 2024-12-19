@@ -1,7 +1,9 @@
 #!/bin/bash
-
+SCRIPT_ABSOLUTE_DIR_PATH=$(pwd)
 git_mail="your_email@example.com"
-
+if [ -z "$1" ];then 
+	git_mail=$1
+fi
 
 
 mkdir /home/$USER/AUR 
@@ -11,10 +13,10 @@ mkdir /home/$USER/.config
 mkdir /home/$USER/.local
 mkdir /home/$USER/.xmonad
 
-ln -s ./xmonad.hs /home/$USER/.xmonad/xmonad.hs
-ln -s ./.xinit /home/$USER/.xinit
-ln -s ./.zshrc /home/$USER/.zshrc 
-ln -s ./picom /home/$USER/.config/picom
+ln -s $SCRIPT_ABSOLUTE_DIR_PATH/xmonad.hs /home/$USER/.xmonad/xmonad.hs
+ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.xinit /home/$USER/.xinit
+ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.zshrc /home/$USER/.zshrc 
+ln -s $SCRIPT_ABSOLUTE_DIR_PATH/picom /home/$USER/.config/picom
 
 
 git clone https://aur.archlinux.org/yay.git ~/AUR 
@@ -32,6 +34,8 @@ if $install_rust; then
 	rustup default stable
 fi
 
-ssh-keygen -t ed25519 -C $git_mail -P ""
+ssh-keygen -t ed25519 -C $git_mail -P "" -f /home/$USER/.ssh/git_key
 eval "$(ssh-agent -s)"
 ssh-add /home/$USER/id_ed25519
+
+passwd $USER

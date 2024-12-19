@@ -5,17 +5,18 @@ if [ ! -e "/etc/fstab" ]; then
 	exit 1
 fi
 
+SCRIPT_ABSOLUTE_DIR_PATH=$(pwd)
 user="arch-linux"
 enable_docker=false
 virtual_box=false
 install_grub=false
 groups="wheel,docker"
-while getopts "u:r:n:d:v" opt; do
+while getopts "u:dvg" opt; do
   case "$opt" in
-	u)
+	  u)
 	  user="$OPTARG"
 	  ;;
-	d)
+  	d)
       	  enable_docker=true
       	  ;;
 	v) 
@@ -33,7 +34,7 @@ done
 sudo pacman -Syy
 sudo pacman -S --needed --noconfirm - < ./packages
 if $virtual_box; then 
-	pacman -S virtualbox-guest-utils
+	pacman -S virtualbox-guest-utils --noconfirm
 	VBoxClient-all
 fi
 
@@ -60,9 +61,9 @@ mkdir /root/.config /root/.xmonad
 git clone https://github.com/Alexandre-Sage/nvim.git /root/.config/nvim
 useradd -m -G $groups -s /bin/zsh $user
 
-ln -s ./xmonad.hs /root/.xmonad/xmonad.hs
-ln -s ./.xinit /root/.xinit
-ln -s ./.zshrc /root/.zshrc 
+ln -s $SCRIPT_ABSOLUTE_DIR_PATH/xmonad.hs /root/.xmonad/xmonad.hs
+ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.xinit /root/.xinit
+ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.zshrc /root/.zshrc 
 
 
 
