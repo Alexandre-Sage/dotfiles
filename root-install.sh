@@ -54,15 +54,17 @@ git clone https://github.com/zsh-users/zsh-autosuggestions.git  /usr/share/zsh/p
 git clone https://github.com/marlonrichert/zsh-autocomplete.git /usr/share/zsh/plugins/zsh-autocomplete
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /usr/share/zsh/plugins/zsh-syntax-highlighting
 
-setfacl -m g:wheel:rwx ./
+chown -R :wheel $SCRIPT_ABSOLUTE_DIR_PATH
 
 mkdir /root/.config /root/.xmonad
 
 git clone https://github.com/Alexandre-Sage/nvim.git /root/.config/nvim
 useradd -m -G $groups -s /bin/zsh $user
 
+chsh -s /bin/zsh
+
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/xmonad.hs /root/.xmonad/xmonad.hs
-ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.xinit /root/.xinit
+ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.xinitrc /root/.xinitrc
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.zshrc /root/.zshrc 
 
 

@@ -76,7 +76,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
   M.fromList $
     -- launch a terminal
     [ ((modm, xK_t), spawn $ XMonad.terminal conf),
-      ((modm .|. shiftMask, xK_r), spawn "/usr/bin/ranger"),
+      ((modm .|. shiftMask, xK_f), spawn $ XMonad.terminal conf ++ " -e ranger"),
+      ((modm .|. shiftMask, xK_s), spawn "spotify"),
       ((modm, xK_f), spawn "firefox"),
       -- launch dmenu
       ((modm, xK_p), spawn "dmenu_run"),
