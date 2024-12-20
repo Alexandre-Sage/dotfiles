@@ -29,8 +29,6 @@ while getopts "u:dvg" opt; do
   esac
 done
 
-
-
 sudo pacman -Syy
 sudo pacman -S --needed --noconfirm - < ./packages
 if $virtual_box; then 
@@ -67,8 +65,6 @@ ln -s $SCRIPT_ABSOLUTE_DIR_PATH/xmonad.hs /root/.xmonad/xmonad.hs
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.xinitrc /root/.xinitrc
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.zshrc /root/.zshrc 
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.Xresources /root/.Xresources 
-
-
 
 sudo systemctl enable  dhcpcd
 
