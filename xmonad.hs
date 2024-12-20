@@ -11,6 +11,8 @@ import Data.Map qualified as M
 import Data.Monoid
 import System.Exit
 import XMonad
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageDocks
 import XMonad.Actions.CycleWS
 import XMonad.Config.Azerty
 import XMonad.Layout.Spacing
@@ -245,8 +247,10 @@ myEventHook = mempty
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
 --
-myLogHook = return () -- dynamicLogWithPP xmobarPP
-
+myLogHook xmproc = dynamicLogWithPP xmobarPP
+                        { ppOutput = hPutStrLn xmproc
+                        , ppTitle = xmobarColor "green" "" . shorten 50
+                        }
 ------------------------------------------------------------------------
 -- Startup hook
 
@@ -267,7 +271,7 @@ main = do
   xmproc <- spawnPipe "picom"
   -- xmproc <- spawnPipe "xmobar"
   -- mySB <- statusBarPipe "xmobar" (pure xmobarPP)
-  xmonad defaults
+  xmonad $ defaults xmproc
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
@@ -275,7 +279,7 @@ main = do
 --
 -- No need to modify this.
 --
-defaults =
+defaults xmproc =
   def
     { -- simple stuff
       terminal = myTerminal,
@@ -293,7 +297,7 @@ defaults =
       layoutHook = myLayout,
       manageHook = myManageHook,
       handleEventHook = myEventHook,
-      logHook = myLogHook,
+      -- logHook = myLogHook xmproc,
       startupHook = myStartupHook
     }
 
