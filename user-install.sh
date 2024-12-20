@@ -19,6 +19,7 @@ ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.xinitrc /home/$USER/.xinitrc
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.zshrc /home/$USER/.zshrc 
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/picom /home/$USER/.config/picom
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/wallpaper /home/$USER/.local/wallpaper
+ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.Xresources /home/$USER/.Xresources 
 
 feh --bg-fill ~/.local/wallpaper/arc_wp1.jpg
 git clone https://aur.archlinux.org/yay.git ~/AUR/yay
