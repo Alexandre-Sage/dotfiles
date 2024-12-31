@@ -6,6 +6,9 @@ if [ ! -e "/etc/fstab" ]; then
 fi
 
 SCRIPT_ABSOLUTE_DIR_PATH=$(pwd)
+ZSH_PLUGINS_DIR=/usr/share/zsh/plugins
+
+
 user="arch-linux"
 enable_docker=false
 virtual_box=false
@@ -51,6 +54,7 @@ mkdir /usr/share/zsh/plugins
 git clone https://github.com/zsh-users/zsh-autosuggestions.git  /usr/share/zsh/plugins/zsh-autosuggestions 
 git clone https://github.com/marlonrichert/zsh-autocomplete.git /usr/share/zsh/plugins/zsh-autocomplete
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /usr/share/zsh/plugins/zsh-syntax-highlighting
+git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_PLUGINS_DIR/zsh-vi-mode
 
 chown -R :wheel $SCRIPT_ABSOLUTE_DIR_PATH
 

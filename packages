@@ -35,3 +35,7 @@ feh
 openssh
 terminator
 ripgrep
+dnsutils
+nmap
+bat
+stylua

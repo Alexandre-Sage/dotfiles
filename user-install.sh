@@ -1,5 +1,7 @@
 #!/bin/bash
 SCRIPT_ABSOLUTE_DIR_PATH=$(pwd)
+NATS_TOKEN=openssl rand -base64 16
+REDIS_TOKEN=openssl rand -base64 16
 git_mail="your_email@example.com"
 if [ -z "$1" ];then 
 	git_mail=$1
@@ -24,7 +26,7 @@ ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.Xresources /home/$USER/.Xresources
 feh --bg-fill ~/.local/wallpaper/arc_wp1.jpg
 git clone https://aur.archlinux.org/yay.git ~/AUR/yay
 cd ~/AUR/yay && makepkg -si --noconfirm
-yay -S spotify ranger fastfetch --noconfirm
+yay -S spotify ranger fastfetch natscli --noconfirm
 
 git clone https://github.com/Alexandre-Sage/nvim.git /home/$USER/.config/nvim
 
@@ -36,6 +38,10 @@ if $install_rust; then
   	echo "Set up rust"
 	rustup default stable
 fi
+
+
+echo -e "export LOCAL_NATS_TOKEN=\"$NATS_TOKEN\"" > .local/.local-infra-env
+echo -e "export LOCAL_REDIS_TOKEN)\"$REDIS_TOKEN\"" >> .local/.local-infra-env
 
 ssh-keygen -t ed25519 -C $git_mail -P "" -f /home/$USER/.ssh/id_ed25519
 eval "$(ssh-agent -s)"
