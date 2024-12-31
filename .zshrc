@@ -57,7 +57,7 @@ bindkey -M viins  '^[[C'  .forward-char  '^[OC'  .forward-char
 # bindkey -M viins             '^I' menu-select
 bindkey "$terminfo[kcbt]" menu-select
 
-if [ "$USER" == "root" ]; then
+if [[ "$EUID" -eq 0 ]]; then
 	export DOCKER_HOST=unix:///run/user/1001/docker.sock
 else
 	export DOCKER_HOST=unix:///var/run/docker.sock
@@ -89,7 +89,9 @@ alias redis(){
   docker run --rm -d -p 6379:6379 redis:latest
 }
 
-alias nats=docker run --rm -d -p 4222:4222 nats:latest
+alias nats-container(){ 
+  docker run --rm -d -p 4222:4222 nats:latest
+}
 
 
 alias changeMac(){
