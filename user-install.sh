@@ -3,9 +3,16 @@ SCRIPT_ABSOLUTE_DIR_PATH=$(pwd)
 NATS_TOKEN=openssl rand -base64 16
 REDIS_TOKEN=openssl rand -base64 16
 git_mail="your_email@example.com"
-if [ -z "$1" ];then 
-	git_mail=$1
-fi
+
+
+while getopts "m:" opt; do
+  case "$opt" in
+	m)
+	  git_mail="$OPTARG"
+	  ;;
+  esac
+done
+
 
 
 mkdir /home/$USER/AUR 
@@ -29,7 +36,12 @@ git clone https://aur.archlinux.org/yay.git ~/AUR/yay
 cd ~/AUR/yay && makepkg -si --noconfirm
 yay -S spotify ranger fastfetch natscli --noconfirm
 
-git clone https://github.com/Alexandre-Sage/nvim.git /home/$USER/.config/nvim
+ssh-keygen -t ed25519 -C $git_mail -P "" -f /home/$USER/.ssh/id_ed25519
+eval "$(ssh-agent -s)"
+ssh-add /home/$USER/.ssh/id_ed25519
+ssh-keyscan github.com >> /home/$USER/.ssh/known_hosts
+
+git clone git@github.com:Alexandre-Sage/nvim.git /home/$USER/.config/nvim
 
 echo "Set up node packages"
 sudo npm i -g pnpm yarn bun typescript turbo tsup ts-node prettier @fsouza/prettierd
@@ -40,7 +52,4 @@ rustup default stable
 echo -e "export LOCAL_NATS_TOKEN=\"$NATS_TOKEN\"" > .local/.local-infra-env
 echo -e "export LOCAL_REDIS_TOKEN)\"$REDIS_TOKEN\"" >> .local/.local-infra-env
 
-# ssh-keygen -t ed25519 -C $git_mail -P "" -f /home/$USER/.ssh/id_ed25519
-# eval "$(ssh-agent -s)"
-# ssh-add /home/$USER/.ssh/id_ed25519
 
