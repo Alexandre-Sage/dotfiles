@@ -263,7 +263,7 @@ myLogHook xmproc =
 --
 -- By default, do nothing.
 myStartupHook = do
-  spawnOnce "feh --bg-fill ~/.local/wallpaper/arc_wp1.jpg"
+  spawn "feh --bg-fill ~/.local/wallpaper/arc_wp1.jpg"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
