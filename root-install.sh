@@ -14,10 +14,14 @@ enable_docker=false
 virtual_box=false
 install_grub=false
 groups="wheel,docker"
-while getopts "u:dvg" opt; do
+password="root"
+while getopts "u:p:dvg" opt; do
   case "$opt" in
-	  u)
+	u)
 	  user="$OPTARG"
+	  ;;
+	p)
+	  password="$OPTARG"
 	  ;;
   	d)
       	  enable_docker=true
@@ -61,7 +65,7 @@ chown -R :wheel $SCRIPT_ABSOLUTE_DIR_PATH
 mkdir /root/.config /root/.xmonad
 
 git clone https://github.com/Alexandre-Sage/nvim.git /root/.config/nvim
-useradd -m -G $groups -s /bin/zsh $user
+useradd -m -G $groups -s /bin/zsh -p $password $user
 echo "%wheel ALL=(ALL:ALL) NOPASSWD: ALL" | EDITOR="tee -a" visudo
 
 chsh -s /bin/zsh
