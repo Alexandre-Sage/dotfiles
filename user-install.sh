@@ -1,7 +1,7 @@
 #!/bin/bash
 SCRIPT_ABSOLUTE_DIR_PATH=$(pwd)
-NATS_TOKEN=openssl rand -base64 16
-REDIS_TOKEN=openssl rand -base64 16
+NATS_TOKEN=$(openssl rand -base64 16)
+REDIS_TOKEN=$(openssl rand -base64 16)
 git_mail="your_email@example.com"
 
 

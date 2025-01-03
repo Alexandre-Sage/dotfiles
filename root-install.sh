@@ -40,7 +40,6 @@ sudo pacman -Syy
 sudo pacman -S --needed --noconfirm - < ./packages
 if $virtual_box; then 
 	pacman -S virtualbox-guest-utils --noconfirm
-	VBoxClient-all
 fi
 
 if $install_grub; then 
@@ -74,12 +73,13 @@ ln -s $SCRIPT_ABSOLUTE_DIR_PATH/xmonad.hs /root/.xmonad/xmonad.hs
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.xinitrc /root/.xinitrc
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.zshrc /root/.zshrc 
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.Xresources /root/.Xresources 
-ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.fzfrc /home/$USER/.fzfrc
+ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.fzfrc /root/.fzfrc
 
 sudo systemctl enable  dhcpcd
 
 if $virtual_box; then 
 	systemctl enable vboxservice
+	VBoxClient-all
 fi
 
 if $enable_docker; then
