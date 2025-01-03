@@ -62,6 +62,7 @@ mkdir /root/.config /root/.xmonad
 
 git clone https://github.com/Alexandre-Sage/nvim.git /root/.config/nvim
 useradd -m -G $groups -s /bin/zsh $user
+echo "%wheel ALL=(ALL:ALL) NOPASSWD: ALL" | EDITOR="tee -a" visudo
 
 chsh -s /bin/zsh
 
@@ -76,3 +77,4 @@ if $enable_docker; then
 	echo "enable docker"
 	sudo systemctl enable  docker
 fi 
+ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.fzfrc /home/$USER/.fzfrc
