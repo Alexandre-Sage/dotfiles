@@ -1,0 +1,6 @@
+.terminator-terminal-window separator {
+  /*background: rgba(0, 233, 199, 0.25);*/
+	background:rgba(13, 13, 13, 0.17);
+  opacity: 0.5;
+  border-radius: 3;
+}

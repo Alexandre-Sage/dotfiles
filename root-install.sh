@@ -78,6 +78,10 @@ ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.fzfrc /home/$USER/.fzfrc
 
 sudo systemctl enable  dhcpcd
 
+if $virtual_box; then 
+	systemctl enable vboxservice
+fi
+
 if $enable_docker; then
 	echo "enable docker"
 	sudo systemctl enable  docker
