@@ -56,4 +56,6 @@ touch  ~/.local/.local-infra-env
 echo -e "export LOCAL_NATS_TOKEN=\"$NATS_TOKEN\"" > ~/.local/.local-infra-env
 echo -e "export LOCAL_REDIS_TOKEN=\"$REDIS_TOKEN\"" >> ~/.local/.local-infra-env
 
-
+if pacman -Q virtualbox-guest-utils &>/dev/null; then
+	VBoxClient-all
+fi
