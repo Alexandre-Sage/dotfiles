@@ -31,9 +31,8 @@ ln -s $SCRIPT_ABSOLUTE_DIR_PATH/picom /home/$USER/.config/picom
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/wallpaper /home/$USER/.local/wallpaper
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.Xresources /home/$USER/.Xresources 
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.fzfrc /home/$USER/.fzfrc
-ln -s $SCRIPT_ABSOLUTE_DIR_PATH/terminaotr.config /home/$USER/.config/terminator/config
+ln -s $SCRIPT_ABSOLUTE_DIR_PATH/terminator /home/$USER/.config/terminator
 
-# feh --bg-fill ~/.local/wallpaper/arc_wp1.jpg
 git clone https://aur.archlinux.org/yay.git ~/AUR/yay
 cd ~/AUR/yay && makepkg -si --noconfirm
 yay -S spotify ranger fastfetch natscli --noconfirm
@@ -43,10 +42,10 @@ ssh-keygen -t ed25519 -C $git_mail -P "" -f /home/$USER/.ssh/id_ed25519
 eval "$(ssh-agent -s)"
 ssh-add /home/$USER/.ssh/id_ed25519
 
-curl --silent https://api.github.com/meta \
-  | jq --raw-output '"github.com "+.ssh_keys[]' >> ~/.ssh/known_hosts
+# curl --silent https://api.github.com/meta \
+#   | jq --raw-output '"github.com "+.ssh_keys[]' >> ~/.ssh/known_hosts
 
-git clone git@github.com:Alexandre-Sage/nvim.git /home/$USER/.config/nvim
+git clone https://github.com/Alexandre-Sage/nvim.git /home/$USER/.config/nvim
 
 echo "Set up node packages"
 sudo npm i -g pnpm yarn bun typescript turbo tsup ts-node prettier @fsouza/prettierd

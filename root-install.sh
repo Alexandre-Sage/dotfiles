@@ -70,6 +70,7 @@ ln -s $SCRIPT_ABSOLUTE_DIR_PATH/xmonad.hs /root/.xmonad/xmonad.hs
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.xinitrc /root/.xinitrc
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.zshrc /root/.zshrc 
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.Xresources /root/.Xresources 
+ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.fzfrc /home/$USER/.fzfrc
 
 sudo systemctl enable  dhcpcd
 
@@ -77,4 +78,3 @@ if $enable_docker; then
 	echo "enable docker"
 	sudo systemctl enable  docker
 fi 
-ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.fzfrc /home/$USER/.fzfrc
