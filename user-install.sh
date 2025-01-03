@@ -22,28 +22,25 @@ ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.zshrc /home/$USER/.zshrc
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/picom /home/$USER/.config/picom
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/wallpaper /home/$USER/.local/wallpaper
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.Xresources /home/$USER/.Xresources 
+ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.fzfrc /home/$USER/.fzfrc
 
-feh --bg-fill ~/.local/wallpaper/arc_wp1.jpg
+# feh --bg-fill ~/.local/wallpaper/arc_wp1.jpg
 git clone https://aur.archlinux.org/yay.git ~/AUR/yay
 cd ~/AUR/yay && makepkg -si --noconfirm
 yay -S spotify ranger fastfetch natscli --noconfirm
 
 git clone https://github.com/Alexandre-Sage/nvim.git /home/$USER/.config/nvim
 
-if $install_node; then
-	echo "Set up node packages"
-	sudo npm i -g pnpm yarn bun typescript turbo tsup ts-node
-fi
-if $install_rust; then
-  	echo "Set up rust"
-	rustup default stable
-fi
+echo "Set up node packages"
+sudo npm i -g pnpm yarn bun typescript turbo tsup ts-node prettier @fsouza/prettierd
+echo "Set up rust"
+rustup default stable
 
 
 echo -e "export LOCAL_NATS_TOKEN=\"$NATS_TOKEN\"" > .local/.local-infra-env
 echo -e "export LOCAL_REDIS_TOKEN)\"$REDIS_TOKEN\"" >> .local/.local-infra-env
 
-ssh-keygen -t ed25519 -C $git_mail -P "" -f /home/$USER/.ssh/id_ed25519
-eval "$(ssh-agent -s)"
-ssh-add /home/$USER/.ssh/id_ed25519
+# ssh-keygen -t ed25519 -C $git_mail -P "" -f /home/$USER/.ssh/id_ed25519
+# eval "$(ssh-agent -s)"
+# ssh-add /home/$USER/.ssh/id_ed25519
 
