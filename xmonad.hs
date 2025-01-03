@@ -11,10 +11,10 @@ import Data.Map qualified as M
 import Data.Monoid
 import System.Exit
 import XMonad
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.ManageDocks
 import XMonad.Actions.CycleWS
 import XMonad.Config.Azerty
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageDocks
 import XMonad.Layout.Spacing
 import XMonad.StackSet qualified as W
 import XMonad.Util.Run
@@ -247,10 +247,13 @@ myEventHook = mempty
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
 --
-myLogHook xmproc = dynamicLogWithPP xmobarPP
-                        { ppOutput = hPutStrLn xmproc
-                        , ppTitle = xmobarColor "green" "" . shorten 50
-                        }
+myLogHook xmproc =
+  dynamicLogWithPP
+    xmobarPP
+      { ppOutput = hPutStrLn xmproc,
+        ppTitle = xmobarColor "green" "" . shorten 50
+      }
+
 ------------------------------------------------------------------------
 -- Startup hook
 
@@ -259,7 +262,8 @@ myLogHook xmproc = dynamicLogWithPP xmobarPP
 -- per-workspace layout choices.
 --
 -- By default, do nothing.
-myStartupHook = return ()
+myStartupHook = do
+  spawnOnce "feh --bg-fill ~/.local/wallpaper/arc_wp1.jpg"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
