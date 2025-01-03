@@ -7,7 +7,7 @@ fi
 
 SCRIPT_ABSOLUTE_DIR_PATH=$(pwd)
 ZSH_PLUGINS_DIR=/usr/share/zsh/plugins
-
+GIT_HUB_URL=https://github.com
 
 user="arch-linux"
 enable_docker=false
@@ -54,9 +54,9 @@ fi
 echo "Set up zsh"
 
 mkdir /usr/share/zsh/plugins
-git clone https://github.com/zsh-users/zsh-autosuggestions.git  /usr/share/zsh/plugins/zsh-autosuggestions 
-git clone https://github.com/marlonrichert/zsh-autocomplete.git /usr/share/zsh/plugins/zsh-autocomplete
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /usr/share/zsh/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions.git  $ZSH_PLUGINS_DIR/zsh-autosuggestions 
+git clone https://github.com/marlonrichert/zsh-autocomplete.git $ZSH_PLUGINS_DIR/zsh-autocomplete
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_PLUGINS_DIR/zsh-syntax-highlighting
 git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_PLUGINS_DIR/zsh-vi-mode
 
 chown -R :wheel $SCRIPT_ABSOLUTE_DIR_PATH

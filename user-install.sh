@@ -23,6 +23,7 @@ mkdir /home/$USER/.local
 mkdir /home/$USER/.xmonad
 mkdir /home/$USER/.ssh
 mkdir /home/$USER/.config/terminator
+mkdir /home/$USER/.config/gtk-3.0
 
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/xmonad.hs /home/$USER/.xmonad/xmonad.hs
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.xinitrc /home/$USER/.xinitrc
