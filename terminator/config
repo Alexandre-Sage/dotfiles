@@ -3,6 +3,7 @@
   window_state = fullscreen
   borderless = True
   extra_styling = False
+  ask_before_closing = never
 [keybindings]
 [profiles]
   [[default]]

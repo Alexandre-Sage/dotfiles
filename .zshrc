@@ -4,12 +4,9 @@
 
 setxkbmap fr 
 fastfetch
-autoload -U promptinit
 source ~/.local/.ads-env
 source ~/.local/.local-infra-env
 source ~/.fzfrc
-autoload -Uz compinit
-compinit
 export EDITOR=nvim
 PROMPT="%F{blue}┌[%f%F{cyan}%m%f%F{blue}]─[%f%F{162}%D{%H:%M-%d/%m}%f%F{blue}]─[%f%F{cyan}%d%f%F{blue}]%f"$'\n'"%F{blue}└╼%f%F{162}$USER%f%F{blue} => %f"
 
@@ -42,10 +39,10 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
+source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
 
@@ -127,3 +124,6 @@ export AWA_ROOT_PATH=/home/adsoftware/project/awa
 
 
 [ -f "/home/adsoftware/.ghcup/env" ] && . "/home/adsoftware/.ghcup/env" # ghcup-env
+autoload -Uz compinit
+autoload -U promptinit
+compinit
