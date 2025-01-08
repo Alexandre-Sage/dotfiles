@@ -51,8 +51,8 @@ git clone https://github.com/Alexandre-Sage/nvim.git /home/$USER/.config/nvim
 
 echo "Set up node packages"
 sudo npm i -g pnpm yarn bun typescript turbo tsup ts-node prettier @fsouza/prettierd
-echo "Set up rust"
-rustup default stable
+# echo "Set up rust"
+# rustup default stable
 
 touch  ~/.local/.local-infra-env
 echo -e "export LOCAL_NATS_TOKEN=\"$NATS_TOKEN\"" > ~/.local/.local-infra-env
