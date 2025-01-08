@@ -66,6 +66,7 @@ mkdir /root/.config /root/.xmonad
 git clone https://github.com/Alexandre-Sage/nvim.git /root/.config/nvim
 useradd -m -G $groups -s /bin/zsh -p $password $user
 echo "%wheel ALL=(ALL:ALL) NOPASSWD: ALL" | EDITOR="tee -a" visudo
+echo "KEYMAP=fr" >> /etc/vconsole.conf
 
 chsh -s /bin/zsh
 
