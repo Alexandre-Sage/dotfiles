@@ -46,7 +46,7 @@ if $install_grub; then
   if $virtual_box; then 
 	 grub-install --target="i386-pc" /dev/sda
   else
-  	 grub-install --target=x86_64-efi --efi-directory=/mnt/boot/efi --bootloader-id=GRUB --recheck
+  	 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --recheck
   fi
   sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
