@@ -299,7 +299,8 @@ defaults xmproc =
       mouseBindings = myMouseBindings,
       -- hooks, layouts
       layoutHook = myLayout,
-      manageHook = myManageHook,
+      -- manageHook = myManageHook,
+       manageHook = manageDocks <+> myManageHook,
       handleEventHook = myEventHook,
       -- logHook = myLogHook xmproc,
       startupHook = myStartupHook

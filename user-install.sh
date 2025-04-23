@@ -34,6 +34,7 @@ ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.Xresources /home/$USER/.Xresources
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.fzfrc /home/$USER/.fzfrc
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/terminator/config /home/$USER/.config/terminator/config
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/gtk.css /home/$USER/.config/gtk-3.0/gtk.css
+ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.sqlfluff /home/$USER/.sqlfluff
 
 git clone https://aur.archlinux.org/yay.git ~/AUR/yay
 cd ~/AUR/yay && makepkg -si --noconfirm
