@@ -1,6 +1,6 @@
- if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-   exec startx
- fi
+ # if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+   # exec startx
+ # fi
 
 setxkbmap fr 
 fastfetch
@@ -9,6 +9,8 @@ source ~/.local/.local-infra-env
 source ~/.fzfrc
 export EDITOR=nvim
 PROMPT="%F{blue}┌[%f%F{cyan}%m%f%F{blue}]─[%f%F{162}%D{%H:%M-%d/%m}%f%F{blue}]─[%f%F{cyan}%d%f%F{blue}]%f"$'\n'"%F{blue}└╼%f%F{162}$USER%f%F{blue} => %f"
+
+source /opt/dotfiles/prompt.sh
 
 export PATH=~/.local/bin:/snap/bin:/usr/sandbox/:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/share/games:/usr/local/sbin:/usr/sbin:/sbin:$PATH
 
@@ -100,9 +102,9 @@ alias changeMac(){
 
 
 
-alias fire(){
-  firefox &> /dev/null &
-}
+# alias fire(){
+#   firefox &> /dev/null &
+# }
 
 
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
@@ -128,3 +130,5 @@ export AWA_ROOT_PATH=/home/adsoftware/project/awa
 autoload -Uz compinit
 autoload -U promptinit
 compinit
+export AWA_ROOT_PATH=/home/adsoftware/test-proj/main/awa
+source /home/adsoftware/test-proj/main/awa/turbo-comp.sh
