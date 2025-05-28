@@ -31,6 +31,7 @@ mkdir /home/$USER/.config/gtk-3.0
 # ln -s $SCRIPT_ABSOLUTE_DIR_PATH/xmonad.hs /home/$USER/.xmonad/xmonad.hs
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.xinitrc /home/$USER/.xinitrc
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.zshrc /home/$USER/.zshrc 
+ln -s $SCRIPT_ABSOLUTE_DIR_PATH/prompt.sh /home/$USER/prompt.sh 
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/picom /home/$USER/.config/picom
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/wallpaper /home/$USER/.local/wallpaper
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.Xresources /home/$USER/.Xresources 
