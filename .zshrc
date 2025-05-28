@@ -1,6 +1,6 @@
- # if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-   # exec startx
- # fi
+if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+  exec startx
+fi
 
 setxkbmap fr 
 fastfetch
@@ -101,16 +101,7 @@ alias changeMac(){
 }
 
 
-
-# alias fire(){
-#   firefox &> /dev/null &
-# }
-
-
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
-
-
-
 
 # pnpm
 export PNPM_HOME="/home/arch_dev/.local/share/pnpm"

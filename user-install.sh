@@ -5,11 +5,14 @@ REDIS_TOKEN=$(openssl rand -base64 16)
 git_mail="your_email@example.com"
 
 
-while getopts "m:" opt; do
+while getopts "m:l" opt; do
   case "$opt" in
 	m)
 	  git_mail="$OPTARG"
 	  ;;
+	l)
+	  $SCRIPT_ABSOLUTE_DIR_PATH/install-leftmw.sh
+	;;
   esac
 done
 
@@ -50,8 +53,8 @@ ssh-add /home/$USER/.ssh/id_ed25519
 
 git clone https://github.com/Alexandre-Sage/nvim.git /home/$USER/.config/nvim
 
-echo "Set up node packages"
-sudo npm i -g pnpm yarn bun typescript turbo tsup ts-node prettier @fsouza/prettierd
+# echo "Set up node packages"
+# sudo npm i -g pnpm yarn bun typescript turbo tsup ts-node prettier @fsouza/prettierd
 # echo "Set up rust"
 # rustup default stable
 

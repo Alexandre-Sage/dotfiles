@@ -49,6 +49,9 @@
     // sloppy_mouse_follows_focus: true,
     keybind: [
         // Window management
+        (command: Execute, value: "amixer -q sset Master 5%+", modifier: [], key: "F12"),
+        (command: Execute, value: "amixer -q sset Master 5%-", modifier: [], key: "F11"),
+        // (command: Execute, value: "dmenu_run", modifier: ["modkey"], key: "p"),
         (command: Execute, value: "dmenu_run", modifier: ["modkey"], key: "p"),
         (command: Execute, value: "terminator", modifier: ["modkey"], key: "t"),
         (command: Execute, value: "firefox", modifier: ["modkey"], key: "f"),
@@ -68,6 +71,7 @@
         (command: NextLayout, value: "", modifier: ["modkey"], key: "space"),
         (command: PreviousLayout, value: "", modifier: ["modkey", "Shift"], key: "space"),
         (command: FocusWorkspaceNext, value: "", modifier: ["modkey"], key: "l"),
+        (command: FocusWorkspaceNext, value: "", modifier: ["modkey"], key: "Tab"),
         (command: FocusWorkspacePrevious, value: "", modifier: ["modkey"], key: "h"),
         (command: MoveWindowUp, value: "", modifier: ["modkey", "Shift"], key: "Up"),
         (command: MoveWindowDown, value: "", modifier: ["modkey", "Shift"], key: "Down"),
@@ -75,7 +79,7 @@
         (command: FocusWindowDown, value: "", modifier: ["modkey"], key: "Down"),
         (command: IncreaseMainWidth, value: "5", modifier: ["modkey","Shift"], key: "l"),
         (command: DecreaseMainWidth, value: "5", modifier: ["modkey","Shift"], key: "h"),
-        (command: SetLayout, value: "MainAndVertStack", modifier: ["modkey","Shift"], key: "t"),
+        (command: SetLayout, value: "MainAndVertStack", modifier: ["modkey","Shift"], key: "m"),
         (command: SetLayout, value: "Monocle", modifier: ["modkey"], key: "m"),
         (command: SetLayout, value: "EvenHorizontal", modifier: ["modkey"], key: "e"),
         (command: ToggleSticky, modifier: ["modkey"], key: "v"),

@@ -26,9 +26,9 @@ FONT_ICON="Hack Nerd Font:style=Regular:size=10"
 
 # Bar dimensions and positioning
 BAR_HEIGHT=24
-BAR_WIDTH=1920              # Set to your screen width, or leave empty for full width
-BAR_X_OFFSET=0              # X position offset
-BAR_Y_OFFSET=0              # Y position offset (0 for top, -0 for bottom)
+BAR_WIDTH=1900              # Set to your screen width, or leave empty for full width
+BAR_X_OFFSET=10              # X position offset
+BAR_Y_OFFSET=7              # Y position offset (0 for top, -0 for bottom)
 
 # Module update intervals (in seconds)
 TIME_INTERVAL=0.5
@@ -154,6 +154,7 @@ LEMONBAR_CMD=(
     -f 'Font Awesome 6 Free' 
     -f 'Font Awesome 6 Brands' 
     -f 'Font Awesome 6 Free Solid'
+    # -g "${BAR_WIDTH}x${BAR_HEIGHT}+${BAR_X_OFFSET}+${BAR_Y_OFFSET}"  # Geometry
     -g "${BAR_WIDTH}x${BAR_HEIGHT}+${BAR_X_OFFSET}+${BAR_Y_OFFSET}"  # Geometry
     -n "lemonbar"              # Window name
     -a 32                      # Number of clickable areas
