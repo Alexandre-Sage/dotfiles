@@ -1,6 +1,5 @@
 [global_config]
   handle_size = 5
-  window_state = fullscreen
   borderless = True
   extra_styling = False
   ask_before_closing = never

@@ -31,7 +31,7 @@ BAR_X_OFFSET=0              # X position offset
 BAR_Y_OFFSET=0              # Y position offset (0 for top, -0 for bottom)
 
 # Module update intervals (in seconds)
-TIME_INTERVAL=1
+TIME_INTERVAL=0.5
 BATTERY_INTERVAL=30
 NETWORK_INTERVAL=5
 VOLUME_INTERVAL=1
