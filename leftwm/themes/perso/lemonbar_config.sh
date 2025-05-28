@@ -91,7 +91,7 @@ get_volume() {
             echo "🔊 ${volume}"
         fi
     else
-        echo "🔊 N/A"
+        echo "󰖁 N/A"
     fi
 }
 
@@ -107,18 +107,23 @@ get_memory() {
     echo " ${memory_usage}"
 }
 
-# Function to get workspace/desktop info (requires wmctrl)
 get_layout() {
     layout=$(leftwm-state -w 0 -s '{{ workspace.layout }}' -q) 
     echo "$layout"
+}
+
+get_worksapce() {
+	workspace=$(leftwm-state -w 0 -t $SCRIPTPATH/template.liquid -q)
+	echo "$workspace"
 }
 
 # Main function to generate bar content
 generate_bar() {
     while true; do
         # Left side - workspace info
-        left="%{l}%{F$ACCENT_COLOR} $(get_layout) %{F-}"
-        
+        left="%{l}%{F$ACCENT_COLOR} $(get_layout) %{F-} | "
+        left="${left}$(get_worksapce)"
+	left="${left} |"
         # Center - time
         center="%{c}%{F$FG_COLOR}$(get_time)%{F-}"
         
