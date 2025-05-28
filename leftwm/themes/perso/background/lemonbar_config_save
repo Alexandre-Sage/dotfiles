@@ -1,0 +1,63 @@
+#!/bin/bash
+
+# Kill existing lemonbar
+killall lemonbar 2>/dev/null
+
+# VERY VIBRANT colors matching your original
+BG="#0f0f23"
+FG="#ffffff"
+BRIGHT_BLUE="#00d4ff"    # Very bright cyan-blue
+BRIGHT_GREEN="#00ff88"   # Very bright green  
+BRIGHT_ORANGE="#ff8800"  # Very bright orange
+BRIGHT_PURPLE="#dd88ff"  # Very bright purple/magenta
+BRIGHT_RED="#ff4444"     # Very bright red
+BRIGHT_YELLOW="#ffdd00"  # Very bright yellow
+
+# System info functions
+cpu_temp() {
+    temp=$(cat /sys/class/thermal/thermal_zone0/temp 2>/dev/null || echo "27000")
+    echo "$((temp/1000))"
+}
+
+ram_usage() {
+    free -h | awk 'NR==2{print $3}' | sed 's/Gi/G/'
+}
+
+volume_info() {
+	# local command=amixer
+	if type amixer >/dev/null 2>&1; 
+	then
+    		vol=$(amixer get Master 2>/dev/null | grep -o '[0-9]*%' | head -1 || echo "75%")
+    		echo "$vol"
+	else
+	    echo "0%"
+	fi
+}
+
+battery_info() {
+    if [ -f /sys/class/power_supply/BAT0/capacity ]; then
+        bat=$(cat /sys/class/power_supply/BAT0/capacity)
+        echo "${bat}"
+    else
+        echo "100%"
+    fi
+}
+
+# Main loop
+while true; do
+    # Left: workspaces with WIDE spacing like your original
+    LEFT="1  2  3  4  5  6  7  8  9  10"
+    
+    # Right: system info with MUCH MORE spacing between elements
+    CPU="%{F$BRIGHT_BLUE}CPU:$(cpu_temp)°C%{F-}"
+    RAM="%{F$BRIGHT_GREEN}RAM:$(ram_usage)%{F-}"
+    BAT="%{F$BRIGHT_YELLOW}Bat:%$(battery_info)%{F-}"
+    VOL="%{F$BRIGHT_BLUE}Vol:$(volume_info)%{F-}"
+    ARCH="%{F$BRIGHT_PURPLE}Arch Linux%{F-}"
+    TIME="%{F$BRIGHT_ORANGE}$(date '+%a %d %b %H:%M:%S')%{F-}"
+    
+    # Build bar with MUCH MORE spacing - multiple spaces between each element
+    echo "%{l}  $LEFT%{r}$CPU    $RAM    $BAT    $VOL    $ARCH    $TIME  "
+    
+    sleep 1
+done | lemonbar -p -f "Hack Nerd Font:size=9" -B"$BG" -F"$FG" -g "x20+0+0"

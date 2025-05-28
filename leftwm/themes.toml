@@ -149,7 +149,6 @@ current = false
 
 [[repos.themes]]
 name = "Ocean-night"
-directory = "/home/adsoftware/.config/leftwm/themes/Ocean-night"
 repository = "https://github.com/TheRoniOne/ocean-night"
 commit = "*"
 version = "0.0.1"

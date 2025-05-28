@@ -25,7 +25,9 @@ if [ -x "$(command -v feh)" ]; then
   feh --bg-scale $SCRIPTPATH/arc_wp1.jpg
 fi
 
-source ./prompt.sh
+$SCRIPTPATH/lemonbar_config.sh
+
+# source ./prompt.sh
 
 # index=0
 # monitors="$(polybar -m | sed s/:.*//)"
