@@ -4,6 +4,7 @@ grub
 xclip
 zsh
 git
+base-devel
 neovim
 dhcpcd
 firefox
@@ -43,7 +44,8 @@ openssl
 sqlfluff
 jwt-cli
 htop
-alsa
+alsa-firmware
+alsa-card-profiles
 alsa-utils
 pulseaudio
 pulseaudio-alsa
