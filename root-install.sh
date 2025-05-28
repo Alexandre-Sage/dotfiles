@@ -36,8 +36,8 @@ while getopts "u:p:dvg" opt; do
   esac
 done
 
-sudo pacman -Syy
-sudo pacman -S --needed --noconfirm - < ./packages
+pacman -Syy
+pacman -S --needed --noconfirm - < ./packages
 if $virtual_box; then 
 	pacman -S virtualbox-guest-utils --noconfirm
 fi
