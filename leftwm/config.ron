@@ -51,6 +51,7 @@
         // Window management
         (command: Execute, value: "amixer -q sset Master 5%+", modifier: [], key: "F12"),
         (command: Execute, value: "amixer -q sset Master 5%-", modifier: [], key: "F11"),
+        (command: Execute, value: "pavucontrol", modifier: [], key: "F9"),
         // (command: Execute, value: "dmenu_run", modifier: ["modkey"], key: "p"),
         (command: Execute, value: "dmenu_run", modifier: ["modkey"], key: "p"),
         (command: Execute, value: "terminator", modifier: ["modkey"], key: "t"),
