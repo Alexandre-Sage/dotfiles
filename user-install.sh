@@ -2,6 +2,7 @@
 SCRIPT_ABSOLUTE_DIR_PATH=$(pwd)
 NATS_TOKEN=$(openssl rand -base64 16)
 REDIS_TOKEN=$(openssl rand -base64 16)
+INSTALL_LEFT=false
 git_mail="your_email@example.com"
 
 
@@ -11,7 +12,7 @@ while getopts "m:l" opt; do
 	  git_mail="$OPTARG"
 	  ;;
 	l)
-	  $SCRIPT_ABSOLUTE_DIR_PATH/install-leftmw.sh
+		INSTALL_LEFT=true
 	;;
   esac
 done
@@ -44,6 +45,10 @@ ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.sqlfluff /home/$USER/.sqlfluff
 git clone https://aur.archlinux.org/yay.git ~/AUR/yay
 cd ~/AUR/yay && makepkg -si --noconfirm
 yay -S spotify ranger fastfetch natscli --noconfirm
+if [ "$INSTALL_LEFT" = true ]; then 
+
+	  $SCRIPT_ABSOLUTE_DIR_PATH/install-leftmw.sh
+fi
 
 
 ssh-keygen -t ed25519 -C $git_mail -P "" -f /home/$USER/.ssh/id_ed25519
