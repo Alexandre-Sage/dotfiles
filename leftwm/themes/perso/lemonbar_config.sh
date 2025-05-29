@@ -1,8 +1,10 @@
 #!/bin/bash
 SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
-BG="#CC0f0f23"
+BG="#CC434a49"
+# BG="#CC0f0f23"
 FG="#ffffff"
 BRIGHT_BLUE="#00d4ff"    # Very bright cyan-blue
+# BRIGHT_GREEN="#ebf5f3"   # Very bright green  
 BRIGHT_GREEN="#00ff88"   # Very bright green  
 BRIGHT_ORANGE="#ff8800"  # Very bright orange
 BRIGHT_PURPLE="#dd88ff"  # Very bright purple/magenta
@@ -121,7 +123,7 @@ get_worksapce() {
 generate_bar() {
     while true; do
         # Left side - workspace info
-        left="%{l}%{F$ACCENT_COLOR} $(get_layout) %{F-} | "
+        left="%{l}%{F$BRIGHT_GREEN} $(get_layout) %{F-} | "
         left="${left}$(get_worksapce)"
 	left="${left} |"
         # Center - time
