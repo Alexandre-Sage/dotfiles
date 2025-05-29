@@ -1,6 +1,6 @@
 #!/bin/bash
 SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
-BG="#0f0f23"
+BG="#CC0f0f23"
 FG="#ffffff"
 BRIGHT_BLUE="#00d4ff"    # Very bright cyan-blue
 BRIGHT_GREEN="#00ff88"   # Very bright green  
