@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+source $SCRIPTPATH/style
+
+while true; do
+    memory_usage=$(free | grep Mem | awk '{printf("%.1f%%", $3/$2 * 100.0)}')
+    echo "$RAM_USAGE_ICON$memory_usage"
+    sleep 2
+done

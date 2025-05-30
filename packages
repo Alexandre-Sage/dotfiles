@@ -1,5 +1,6 @@
 sudo
 iwd
+wpa_supplicant
 efibootmgr
 xterm
 grub

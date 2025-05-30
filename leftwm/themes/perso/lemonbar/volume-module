@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+source $SCRIPTPATH/style
+
+while true; do
+    if command -v amixer >/dev/null 2>&1; then
+        volume=$(amixer get Master | grep -o '[0-9]*%' | head -n1)
+        muted=$(amixer get Master | grep -o '\[off\]')
+        
+        if [ "$muted" ]; then
+            echo "V%{F$WARNING_COLOR}Muted%{F-}"
+        else
+            echo "V ${volume}"
+        fi
+    else
+        echo "V󰖁 N/A"
+    fi
+    sleep 1
+done

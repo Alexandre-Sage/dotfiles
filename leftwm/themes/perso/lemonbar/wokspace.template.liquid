@@ -1,0 +1,20 @@
+{% for tag in workspace.tags %}
+{% if tag.mine %}
+%{ {{workspace.index}} {{tag.index}}}
+%{F#000000}%{B#FFB52A}  {{tag.name}}  %{B-}%{F-}
+
+{% elsif tag.urgent %}
+%{ {{workspace.index}} {{tag.index}}}
+%{B#FF0000}%{F#000000}  {{tag.name}}  %{F-}%{B-}
+{% elsif tag.visible  %}
+%{ {{workspace.index}} {{tag.index}}}
+%{F#000000}%{B#FFFFFF}  {{tag.name}}  %{B-}%{F-}
+{% elsif tag.busy %}
+%{ {{workspace.index}} {{tag.index}}}
+%{F#FFB52A}  {{tag.name}}  %{F-}
+{% else %}
+%{ {{workspace.index}} {{tag.index}}}
+%{F#FFFFFF}  {{tag.name}}  %{F-}
+{% endif %}
+{% endfor %}
+%{c}

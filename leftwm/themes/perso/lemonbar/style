@@ -1,0 +1,21 @@
+#!/bin/bash
+
+
+export BRIGHT_BLUE="#00d4ff"    # Very bright cyan-blue
+export BRIGHT_GREEN="#00ff88"   # Very bright green  
+export BRIGHT_ORANGE="#ff8800"  # Very bright orange
+export BRIGHT_PURPLE="#dd88ff"  # Very bright purple/magenta
+export BRIGHT_RED="#ff4444"     # Very bright red
+export BRIGHT_YELLOW="#ffdd00"  # Very bright yellow
+
+export WARNING_COLOR="#ffaa00"      # Warning color (orange)
+export CRITICAL_COLOR="#ff0000"     # Critical color (red)
+
+export FONT_MAIN="Hack Nerd Font:style=Regular:size=10"
+export FONT_ICON="Hack Nerd Font:style=Regular:size=10"
+
+export RAM_USAGE_ICON=" "
+export CPU_USAGE_ICON=""
+
+export BG_COLOR="#CC0f0f23"
+export FG_COLOR=$BRIGHT_BLUE

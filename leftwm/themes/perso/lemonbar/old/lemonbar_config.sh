@@ -1,54 +1,11 @@
 #!/bin/bash
 
 
-######
-get_screen_info() {
-    if command -v xrandr >/dev/null 2>&1; then
-        # Get primary monitor dimensions using xrandr
-        SCREEN_WIDTH=$(xrandr --query | grep ' connected primary' | grep -o '[0-9]*x[0-9]*' | cut -d'x' -f1)
-        if [ -z "$SCREEN_WIDTH" ]; then
-            # Fallback: get first connected monitor
-            SCREEN_WIDTH=$(xrandr --query | grep ' connected' | head -n1 | grep -o '[0-9]*x[0-9]*' | cut -d'x' -f1)
-        fi
-    elif command -v xdpyinfo >/dev/null 2>&1; then
-        # Alternative method using xdpyinfo
-        SCREEN_WIDTH=$(xdpyinfo | grep dimensions | awk '{print $2}' | cut -d'x' -f1)
-    else
-        # Default fallback
-        SCREEN_WIDTH=1920
-        echo "Warning: Could not detect screen width, using default: $SCREEN_WIDTH"
-    fi
-    
-    # Ensure we have a valid width
-    if [ -z "$SCREEN_WIDTH" ] || [ "$SCREEN_WIDTH" -eq 0 ]; then
-        SCREEN_WIDTH=1920
-        echo "Warning: Invalid screen width detected, using default: $SCREEN_WIDTH"
-    fi
-}
-
-# Calculate bar dimensions based on screen size
-calculate_bar_dimensions() {
-    get_screen_info
-    
-    # Calculate bar width (screen width - 20px)
-    BAR_WIDTH=$((SCREEN_WIDTH - 20))
-    
-    # Calculate X offset to center the bar
-    # (screen width - bar width) / 2
-    BAR_X_OFFSET=$(((SCREEN_WIDTH - BAR_WIDTH) / 2))
-    
-    echo "Screen width: ${SCREEN_WIDTH}px"
-    echo "Bar width: ${BAR_WIDTH}px"
-    echo "X offset: ${BAR_X_OFFSET}px"
-}
-########
 
 SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
-BG="#CC434a49"
-# BG="#CC0f0f23"
+BG="#CC0f0f23"
 FG="#ffffff"
 BRIGHT_BLUE="#00d4ff"    # Very bright cyan-blue
-# BRIGHT_GREEN="#ebf5f3"   # Very bright green  
 BRIGHT_GREEN="#00ff88"   # Very bright green  
 BRIGHT_ORANGE="#ff8800"  # Very bright orange
 BRIGHT_PURPLE="#dd88ff"  # Very bright purple/magenta
@@ -65,16 +22,13 @@ ACCENT_COLOR="#00ff00"       # Accent color for highlights
 WARNING_COLOR="#ffaa00"      # Warning color (orange)
 CRITICAL_COLOR="#ff0000"     # Critical color (red)
 
-# Font settings
-# FONT_MAIN="Adwaita Mono:size=10"
 FONT_MAIN="Hack Nerd Font:style=Regular:size=10"
 FONT_ICON="Hack Nerd Font:style=Regular:size=10"
 
 # Bar dimensions and positioning
 BAR_HEIGHT=24
 BAR_Y_OFFSET=7              # Y position offset (0 for top, -0 for bottom)
-calculate_bar_dimensions
-
+source $SCRIPTPATH/dimension.sh
 # Module update intervals (in seconds)
 TIME_INTERVAL=0.5
 BATTERY_INTERVAL=30
@@ -86,45 +40,6 @@ get_time() {
     date "+%H:%M:%S %d/%m/%Y"
 }
 
-# Function to get battery status
-get_battery() {
-    if [ -f /sys/class/power_supply/BAT0/capacity ]; then
-        battery_level=$(cat /sys/class/power_supply/BAT0/capacity)
-        battery_status=$(cat /sys/class/power_supply/BAT0/status)
-        
-        if [ "$battery_status" = "Charging" ]; then
-            echo " ${battery_level}%"
-        elif [ "$battery_level" -lt 20 ]; then
-            echo "%{F$CRITICAL_COLOR} ${battery_level}%%{F-}"
-        elif [ "$battery_level" -lt 50 ]; then
-            echo "%{F$WARNING_COLOR} ${battery_level}%%{F-}"
-        else
-            echo " ${battery_level}%"
-        fi
-    else
-        echo " AC"
-    fi
-}
-
-# Function to get network status
-get_network() {
-    # Check for active network interface
-    if ip route | grep -q "default"; then
-        interface=$(ip route | grep default | awk '{print $5}' | head -n1)
-        if [[ $interface == wl* ]]; then
-            # Wireless connection
-            signal=$(sudo grep "^\s*$interface:" /proc/net/wireless | awk '{print int($3 * 70 / 70)"%"}')
-            echo " ${signal}"
-        else
-            # Wired connection
-            echo "󰱓Connected"
-        fi
-    else
-        echo "%{F$CRITICAL_COLOR}❌ Offline%{F-}"
-    fi
-}
-
-# Function to get volume
 get_volume() {
     if command -v amixer >/dev/null 2>&1; then
         volume=$(amixer get Master | grep -o '[0-9]*%' | head -n1)
@@ -158,7 +73,7 @@ get_layout() {
 }
 
 get_worksapce() {
-	workspace=$(leftwm-state -w 0 -t $SCRIPTPATH/template.liquid -q)
+	workspace=$(leftwm-state -w 0 -t $SCRIPTPATH/wokspace.template.liquid -q)
 	echo "$workspace"
 }
 
@@ -166,7 +81,7 @@ get_worksapce() {
 generate_bar() {
     while true; do
         # Left side - workspace info
-        left="%{l}%{F$BRIGHT_GREEN} $(get_layout) %{F-} | "
+        left="%{l}%{F$ACCENT_COLOR} $(get_layout) %{F-} | "
         left="${left}$(get_worksapce)"
 	left="${left} |"
         # Center - time
@@ -177,8 +92,8 @@ generate_bar() {
         right="${right}$(get_cpu) | "
         right="${right}$(get_memory) | "
         right="${right}$(get_volume) | "
-        right="${right}$(get_network) | "
-        right="${right}$(get_battery) "
+        right="${right}$($SCRIPTPATH/network.sh) | "
+        right="${right}$($SCRIPTPATH/battery.sh) "
         
         # Combine all parts
         echo "${left}${center}${right}"

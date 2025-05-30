@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+source $SCRIPTPATH/style
+
+while true; do
+if [ -f /sys/class/power_supply/BAT0/capacity ]; then
+    battery_level=$(cat /sys/class/power_supply/BAT0/capacity)
+    battery_status=$(cat /sys/class/power_supply/BAT0/status)
+    
+    if [ "$battery_status" = "Charging" ]; then
+        echo "B ${battery_level}%"
+    elif [ "$battery_level" -lt 20 ]; then
+        echo "B%{F$CRITICAL_COLOR} ${battery_level}%%%{F-}"
+    elif [ "$battery_level" -lt 50 ]; then
+        echo "B%{F$WARNING_COLOR} ${battery_level}%%%{F-}"
+    else
+        echo "B ${battery_level}%"
+    fi
+else
+    echo "B AC"
+fi
+sleep 5
+done
