@@ -1,6 +1,7 @@
 #!/bin/bash
 
 
+export WHITE="#c9c9c9"
 export BRIGHT_BLUE="#00d4ff"    # Very bright cyan-blue
 export BRIGHT_GREEN="#00ff88"   # Very bright green  
 export BRIGHT_ORANGE="#ff8800"  # Very bright orange
@@ -17,5 +18,6 @@ export FONT_ICON="Hack Nerd Font:style=Regular:size=10"
 export RAM_USAGE_ICON=" "
 export CPU_USAGE_ICON=""
 
-export BG_COLOR="#CC0f0f23"
-export FG_COLOR=$BRIGHT_BLUE
+export BG_COLOR="#CC212624"
+#"#CC0f0f23"
+export FG_COLOR=$WHITE

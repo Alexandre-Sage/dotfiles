@@ -54,7 +54,7 @@
         (command: Execute, value: "pavucontrol", modifier: [], key: "F9"),
         // (command: Execute, value: "dmenu_run", modifier: ["modkey"], key: "p"),
         (command: Execute, value: "dmenu_run", modifier: ["modkey"], key: "p"),
-        (command: Execute, value: "terminator", modifier: ["modkey"], key: "t"),
+        (command: Execute, value: "alacritty", modifier: ["modkey"], key: "t"),
         (command: Execute, value: "firefox", modifier: ["modkey"], key: "f"),
         (command: Execute, value: "terminator -e ranger", modifier: ["modkey","Shift"], key: "f"),
         (command: CloseWindow, value: "", modifier: ["modkey", "Shift"], key: "c"),

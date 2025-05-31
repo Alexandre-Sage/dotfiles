@@ -1,0 +1,45 @@
+[window]
+dynamic_title = false  
+startup_mode = "Windowed"  # Windowed mode on startup
+opacity = 0.7
+
+[terminal]
+shell = "/bin/zsh"
+
+# [keyboard]
+# mode = "vi"
+
+[font]
+normal = { family = "Hack Nerd Font", style = "Regular" }
+size = 10.0
+
+[colors.primary]
+background = "#030303"
+foreground = "#00ffcc"
+
+[colors.normal]
+black   = "#000000"
+red     = "#1c71d8"
+green   = "#03ff9e"
+yellow  = "#aa5500"
+blue    = "#fff500"
+magenta = "#aa00aa"
+cyan    = "#00aaaa"
+white   = "#aaaaaa"
+
+[colors.bright]
+black   = "#555555"
+red     = "#99c1f1"
+green   = "#55ff55"
+yellow  = "#ffff55"
+blue    = "#f6d32d"
+magenta = "#ff55ff"
+cyan    = "#55ffff"
+white   = "#030303"
+
+[scrolling]
+history = 10000  # Infinite scrollback
+
+
+
+

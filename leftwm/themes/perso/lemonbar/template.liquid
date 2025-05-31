@@ -1,8 +1,9 @@
 {% assign mine_open_colors = '%{B#616587}' %}
 {% assign visible_open_colors = '%{F#179299}' %}
 {% assign busy_open_colors = '%{B#37394b}' %}
-{% assign close_colors = '%{B-}%{F-}' %}
+{% assign layout_fg_color = '%{F#00ff88}' %}
 
+{% assign close_colors = '%{B-}%{F-}' %}
 
 
 %{l}
@@ -19,5 +20,5 @@
 {% endif %}
 %{A}
 {% endfor %}╱ 
-{{ workspace.layout }}
+{{layout_fg_color}} {{ workspace.layout }} {{close_colors}} 
 {% comment %} {{ window_title }} {% endcomment %}

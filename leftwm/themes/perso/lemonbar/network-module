@@ -1,13 +1,17 @@
 #!/usr/bin/env bash
 
- # Check for active network interface
  while true; do 
  if ip route | grep -q "default"; then
      interface=$(ip route | grep default | awk '{print $5}' | head -n1)
      if [[ $interface == wl* ]]; then
-         # Wireless connection
-         signal=$(sudo grep "^\s*$interface:" /proc/net/wireless | awk '{print int($3 * 70 / 70)"%"}')
-         echo "N ${signal}"
+         signal=$(sudo grep "^\s*$interface:" /proc/net/wireless | awk '{print int($3 * 70 / 70)}')
+	if [[ "$signal" -lt 10 ]]; then
+	   echo "N%{F$CRITICAL_COLOR} ${signal}%%%{F-}"
+	elif [[ "$signal" -lt 50 ]]; then
+	   echo "N%{F$WARNING_COLOR} ${signal}%%%{F-}"
+   	else
+           echo "N ${signal}%"
+	fi
      else
          # Wired connection
          echo "N󰱓Wired"

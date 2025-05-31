@@ -12,7 +12,7 @@ while getopts "m:l" opt; do
 	  git_mail="$OPTARG"
 	  ;;
 	l)
-		INSTALL_LEFT=true
+	  INSTALL_LEFT=true
 	;;
   esac
 done
@@ -46,8 +46,7 @@ git clone https://aur.archlinux.org/yay.git ~/AUR/yay
 cd ~/AUR/yay && makepkg -si --noconfirm
 yay -S spotify ranger fastfetch natscli --noconfirm
 if [ "$INSTALL_LEFT" = true ]; then 
-
-	  $SCRIPT_ABSOLUTE_DIR_PATH/install-leftmw.sh
+   $SCRIPT_ABSOLUTE_DIR_PATH/install-leftmw.sh
 fi
 
 
@@ -55,15 +54,8 @@ ssh-keygen -t ed25519 -C $git_mail -P "" -f /home/$USER/.ssh/id_ed25519
 eval "$(ssh-agent -s)"
 ssh-add /home/$USER/.ssh/id_ed25519
 
-# curl --silent https://api.github.com/meta \
-#   | jq --raw-output '"github.com "+.ssh_keys[]' >> ~/.ssh/known_hosts
 
 git clone https://github.com/Alexandre-Sage/nvim.git /home/$USER/.config/nvim
-
-# echo "Set up node packages"
-# sudo npm i -g pnpm yarn bun typescript turbo tsup ts-node prettier @fsouza/prettierd
-# echo "Set up rust"
-# rustup default stable
 
 touch  ~/.local/.local-infra-env
 echo -e "export LOCAL_NATS_TOKEN=\"$NATS_TOKEN\"" > ~/.local/.local-infra-env
