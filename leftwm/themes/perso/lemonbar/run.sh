@@ -51,7 +51,7 @@ main_bar() {
   # Sorted based on their first letter
   while read -r; do
       case "$REPLY" in
-	  "$RAM_USAGE_ICON"*) local memory_usage=${REPLY} ;;
+	  RAM*) local memory_usage=${REPLY:3} ;;
 	  CPU*) local  cpu_usage=${REPLY:3} ;;
           K*) local kernel="${REPLY#?}" ;;
           C*) local clock="${REPLY#?}" ;;

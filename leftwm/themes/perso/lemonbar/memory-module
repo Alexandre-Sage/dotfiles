@@ -5,6 +5,12 @@ source $SCRIPTPATH/style
 
 while true; do
     memory_usage=$(free | grep Mem | awk '{printf("%.1f%%", $3/$2 * 100.0)}')
-    echo "$RAM_USAGE_ICON$memory_usage"
+    if (( (echo "$memory_usage > 80" | bc -l) )); then
+      echo "RAM%{F$CRITICAL_COLOR}$RAM_USAGE_ICON ${memory_usage}%%%{F-}"
+    elif (( $(echo "$memory_usage > 50" | bc -l) )); then
+      echo "RAM%{F$WARNING_COLOR}$RAM_USAGE_ICON ${memory_usage}%%%{F-}"
+    else   	
+      echo "RAM$RAM_USAGE_ICON$memory_usage"
+    fi
     sleep 2
 done
