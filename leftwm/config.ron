@@ -3,7 +3,13 @@
     modkey: "Mod1",
     focused_border_color: (0.5, 0.0, 1.0, 1.0),
     // mousekey: "Mod4",
-    workspaces: [],
+    gutter: [
+    // ( side: Left, value: 10, output: "HDMI-1" ),
+    // ( side: Right, value: 10, output: "eDP-1", id: 2 )
+    ],
+    workspaces: [
+    // ( output: "HDMI-1", y: 0, x: 0, height: 1080, width: 1920 )
+    ],
     tags: [
         "1",
         "2", 
@@ -40,6 +46,7 @@
     window_rules: [
         // (name: "terminator", value: "terminator", floating: true),
     ],
+
     disable_current_tag_swap: false,
     disable_tile_drag: false,
     // disable_window_snap: true,
@@ -59,6 +66,7 @@
         (command: Execute, value: "terminator -e ranger", modifier: ["modkey","Shift"], key: "f"),
         (command: CloseWindow, value: "", modifier: ["modkey", "Shift"], key: "c"),
         (command: SoftReload, value: "", modifier: ["modkey", "Shift"], key: "r"),
+        (command: HardReload, value: "", modifier: ["modkey", "Shift"], key: "h"),
         // (command: Execute, value: "loginctl kill-session $XDG_SESSION_ID", modifier: ["modkey", "Shift"], key: "x"),
         // (command: Execute, value: "slock", modifier: ["modkey", "Control"], key: "l"),
         // (command: MoveToLastWorkspace, value: "", modifier: ["modkey", "Shift"], key: "w"),
