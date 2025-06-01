@@ -52,7 +52,7 @@ main_bar() {
   while read -r; do
       case "$REPLY" in
 	  "$RAM_USAGE_ICON"*) local memory_usage=${REPLY} ;;
-	  "$CPU_USAGE_ICON"*) local  cpu_usage=${REPLY} ;;
+	  CPU*) local  cpu_usage=${REPLY:3} ;;
           K*) local kernel="${REPLY#?}" ;;
           C*) local clock="${REPLY#?}" ;;
 	  N*) local network="${REPLY:1}" ;;
