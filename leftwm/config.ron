@@ -91,6 +91,7 @@
         (command: SetLayout, value: "MainAndVertStack", modifier: ["modkey","Shift"], key: "m"),
         (command: SetLayout, value: "Monocle", modifier: ["modkey"], key: "m"),
         (command: SetLayout, value: "EvenHorizontal", modifier: ["modkey"], key: "e"),
+        (command: SetLayout, value: "CenterMainFluid", modifier: ["modkey","Shift"], key: "e"),
         (command: ToggleSticky, modifier: ["modkey"], key: "v"),
         (command: ToggleFullScreen, modifier: ["modkey"], key: "u"),
         
