@@ -24,7 +24,9 @@ leftwm-command "LoadTheme $SCRIPTPATH/theme.ron"
 
 #set background
 if [ -x "$(command -v feh)" ]; then
-  feh --bg-scale $SCRIPTPATH/background/arc_wp1.jpg
+  # feh --bg-scale $SCRIPTPATH/background/arc_wp1.jpg
+  # feh --bg-fill $SCRIPTPATH/background/arch24.png
+  feh --bg-scale $SCRIPTPATH/background/arch24.png
 fi
 
 $SCRIPTPATH/lemonbar/run.sh
