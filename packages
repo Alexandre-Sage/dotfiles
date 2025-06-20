@@ -56,3 +56,5 @@ xorg-xinit
 xterm
 zip
 zsh
+dunst
+libnotify

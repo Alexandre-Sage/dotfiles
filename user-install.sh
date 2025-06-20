@@ -51,7 +51,7 @@ if [ "$INSTALL_LEFT" = true ]; then
 fi
 
 
-ssh-keygen -t ed25519 -C $git_mail -P "" -f /home/$USER/.ssh/id_ed25519
+ssh-keygen -t ed25519 -C $git_mail -P "" -f $HOME/.ssh/id_ed25519
 eval "$(ssh-agent -s)"
 ssh-add /home/$USER/.ssh/id_ed25519
 
