@@ -51,12 +51,13 @@ configure_leftwm() {
 	log "Configuring LeftWM..."
 	
 	if [ -e "$HOME/.config/leftwm" ]; then
-		warning "LeftWM config symlink already exists, skipping"
-	else
-		ln -s $SCRIPT_DIR/leftwm $HOME/.config/leftwm \
-			|| error "Failed to create LeftWM config symlink"
-		log "LeftWM config symlink created"
+		warning "LeftWM config symlink already exists, removing it"
+		rm -rf $HOME/.config/leftwm
 	fi
+
+	ln -s $SCRIPT_DIR/leftwm $HOME/.config/leftwm \
+		|| error "Failed to create LeftWM config symlink"
+	log "LeftWM config symlink created"
 	
 	log "Applying LeftWM theme 'perso'..."
 	leftwm-theme apply "perso" \
