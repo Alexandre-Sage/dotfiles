@@ -187,6 +187,9 @@ set_up_config_files() {
 
 	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/config-files/.fzfrc /root/.fzfrc \
 		|| warning "Failed to create .fzfrc symlink"
+
+	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/utils/nvim-server /root/.config/nvim \
+		|| warning "Failed to create nvim-server symlink"
 	
 	log "Configuration files symlinked successfully"
 }
