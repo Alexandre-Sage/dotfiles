@@ -85,11 +85,13 @@ done
 install_packages() {
 	log "Installing packages..."
 	pacman -Syy || error "Failed to sync package databases"
-	pacman -S --needed --noconfirm - < ./packages || error "Failed to install packages from ./packages"
+	pacman -S --needed --noconfirm - < ./packages \
+		|| error "Failed to install packages from ./packages"
 	
 	if $virtual_box; then
 		log "Installing VirtualBox guest utilities..."
-		pacman -S virtualbox-guest-utils --noconfirm || error "Failed to install VirtualBox guest utilities"
+		pacman -S virtualbox-guest-utils --noconfirm \
+			|| error "Failed to install VirtualBox guest utilities"
 	fi
 	log "Package installation completed successfully"
 }
@@ -99,16 +101,20 @@ configure_grub() {
 		log "Configuring GRUB bootloader..."
 		if $virtual_box; then
 			log "Installing GRUB for VirtualBox (i386-pc, /dev/sda)"
-			grub-install --target="i386-pc" /dev/sda || error "Failed to install GRUB for VirtualBox"
+			grub-install --target="i386-pc" /dev/sda \
+				|| error "Failed to install GRUB for VirtualBox"
 		elif $qemu; then
 			log "Installing GRUB for QEMU (i386-pc, /dev/vda)"
-			grub-install --target="i386-pc" /dev/vda || error "Failed to install GRUB for QEMU"
+			grub-install --target="i386-pc" /dev/vda \
+				|| error "Failed to install GRUB for QEMU"
 		else
 			log "Installing GRUB for UEFI (x86_64-efi)"
-			grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --recheck || error "Failed to install GRUB for UEFI"
+			grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --recheck \
+				|| error "Failed to install GRUB for UEFI"
 		fi
 		log "Generating GRUB configuration..."
-		sudo grub-mkconfig -o /boot/grub/grub.cfg || error "Failed to generate GRUB configuration"
+		sudo grub-mkconfig -o /boot/grub/grub.cfg \
+			|| error "Failed to generate GRUB configuration"
 		log "GRUB configuration completed"
 	else
 		log "Skipping GRUB installation (not requested)"
@@ -118,13 +124,21 @@ configure_grub() {
 configure_zsh() {
 	log "Configuring ZSH and plugins..."
 	
-	mkdir -p /usr/share/zsh/plugins || error "Failed to create ZSH plugins directory"
+	mkdir -p /usr/share/zsh/plugins \
+		|| error "Failed to create ZSH plugins directory"
 	
 	log "Cloning ZSH plugins..."
-	git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_PLUGINS_DIR/zsh-autosuggestions || warning "Failed to clone zsh-autosuggestions"
-	git clone https://github.com/marlonrichert/zsh-autocomplete.git $ZSH_PLUGINS_DIR/zsh-autocomplete || warning "Failed to clone zsh-autocomplete"
-	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_PLUGINS_DIR/zsh-syntax-highlighting || warning "Failed to clone zsh-syntax-highlighting"
-	git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_PLUGINS_DIR/zsh-vi-mode || warning "Failed to clone zsh-vi-mode"
+	git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_PLUGINS_DIR/zsh-autosuggestions \
+		|| warning "Failed to clone zsh-autosuggestions"
+
+	git clone https://github.com/marlonrichert/zsh-autocomplete.git $ZSH_PLUGINS_DIR/zsh-autocomplete \
+		|| warning "Failed to clone zsh-autocomplete"
+
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_PLUGINS_DIR/zsh-syntax-highlighting \
+		|| warning "Failed to clone zsh-syntax-highlighting"
+
+	git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_PLUGINS_DIR/zsh-vi-mode \
+		|| warning "Failed to clone zsh-vi-mode"
 
 	log "Creating ZSH symlinks for root user..."
 	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/.zshrc /root/.zshrc || error "Failed to create .zshrc symlink"
@@ -139,20 +153,25 @@ configure_groups_and_permissions() {
 	log "Configuring groups and permissions..."
 	
 	log "Setting wheel group ownership for $SCRIPT_ABSOLUTE_DIR_PATH"
-	chown -R :wheel $SCRIPT_ABSOLUTE_DIR_PATH || warning "Failed to change ownership to wheel group"
+	chown -R :wheel $SCRIPT_ABSOLUTE_DIR_PATH \
+		|| warning "Failed to change ownership to wheel group"
 
 	log "Creating root config directory..."
-	mkdir -p /root/.config || error "Failed to create /root/.config directory"
+	mkdir -p /root/.config \
+		|| error "Failed to create /root/.config directory"
 	# git clone https://github.com/Alexandre-Sage/nvim.git /root/.config/nvim
 
 	log "Creating user '$user' with groups: $groups"
-	useradd -m -G $groups -s /bin/zsh -p $password $user || error "Failed to create user $user"
+	useradd -m -G $groups -s /bin/zsh -p $password $user \
+		|| error "Failed to create user $user"
 	
 	log "Configuring sudo permissions for wheel group..."
-	echo "%wheel ALL=(ALL:ALL) NOPASSWD: ALL" | EDITOR="tee -a" visudo || error "Failed to configure sudo permissions"
+	echo "%wheel ALL=(ALL:ALL) NOPASSWD: ALL" | EDITOR="tee -a" visudo \
+		|| error "Failed to configure sudo permissions"
 	
 	log "Setting keyboard layout to French (fr)..."
-	echo "KEYMAP=fr" >> /etc/vconsole.conf || warning "Failed to set KEYMAP in vconsole.conf"
+	echo "KEYMAP=fr" >> /etc/vconsole.conf \
+		|| warning "Failed to set KEYMAP in vconsole.conf"
 	
 	log "Groups and permissions configured successfully"
 }
@@ -160,9 +179,14 @@ configure_groups_and_permissions() {
 set_up_config_files() {
 	log "Setting up configuration file symlinks for root..."
 	
-	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/.xinitrc /root/.xinitrc || warning "Failed to create .xinitrc symlink"
-	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/.Xresources /root/.Xresources || warning "Failed to create .Xresources symlink"
-	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/.fzfrc /root/.fzfrc || warning "Failed to create .fzfrc symlink"
+	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/.xinitrc /root/.xinitrc \
+		|| warning "Failed to create .xinitrc symlink"
+
+	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/.Xresources /root/.Xresources \
+		|| warning "Failed to create .Xresources symlink"
+
+	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/.fzfrc /root/.fzfrc \
+		|| warning "Failed to create .fzfrc symlink"
 	
 	log "Configuration files symlinked successfully"
 }
@@ -171,17 +195,22 @@ enable_systems(){
 	log "Enabling system services..."
 	
 	log "Enabling dhcpcd service..."
-	sudo systemctl enable dhcpcd || error "Failed to enable dhcpcd service"
+	sudo systemctl enable dhcpcd \
+		|| error "Failed to enable dhcpcd service"
 	
 	if $virtual_box; then
 		log "Enabling VirtualBox services..."
-		systemctl enable vboxservice || error "Failed to enable vboxservice"
-		VBoxClient-all || warning "Failed to start VBoxClient-all"
+		systemctl enable vboxservice \
+			|| error "Failed to enable vboxservice"
+
+		VBoxClient-all \
+			|| warning "Failed to start VBoxClient-all"
 	fi
 	
 	if $enable_docker; then
 		log "Enabling Docker service..."
-		sudo systemctl enable docker || error "Failed to enable Docker service"
+		sudo systemctl enable docker \
+			|| error "Failed to enable Docker service"
 	fi
 	
 	log "System services enabled successfully"
