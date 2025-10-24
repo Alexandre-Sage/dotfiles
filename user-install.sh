@@ -151,7 +151,7 @@ install_aur_packages(){
 install_gui(){
 	if [ "$INSTALL_LEFT" = true ]; then
 		log "Installing LeftWM window manager..."
-		$SCRIPT_ABSOLUTE_DIR_PATH/install-leftmw.sh \
+		$SCRIPT_ABSOLUTE_DIR_PATH/gui/install-leftmw.sh \
 			|| error "Failed to install LeftWM"
 
 		log "LeftWM installation completed"

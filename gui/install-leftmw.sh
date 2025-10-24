@@ -1,7 +1,11 @@
 #!/bin/bash
 
-SCRIPT_ABSOLUTE_DIR_PATH=$(pwd)
-source "$SCRIPT_ABSOLUTE_DIR_PATH/helpers/log.sh"
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Get the dotfiles root directory (parent of gui/)
+DOTFILES_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+source "$DOTFILES_ROOT/helpers/log.sh"
 
 install_leftwm_package() {
 	log "Checking LeftWM packages..."
@@ -49,7 +53,7 @@ configure_leftwm() {
 	if [ -e "$HOME/.config/leftwm" ]; then
 		warning "LeftWM config symlink already exists, skipping"
 	else
-		ln -s $SCRIPT_ABSOLUTE_DIR_PATH/leftwm $HOME/.config/leftwm \
+		ln -s $SCRIPT_DIR/leftwm $HOME/.config/leftwm \
 			|| error "Failed to create LeftWM config symlink"
 		log "LeftWM config symlink created"
 	fi
