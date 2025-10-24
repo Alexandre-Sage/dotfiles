@@ -1,0 +1,14 @@
+[Unit]
+Description=VM Network Auto-Configuration
+After=network.target
+Wants=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/vm-startup-network.sh
+RemainAfterExit=yes
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

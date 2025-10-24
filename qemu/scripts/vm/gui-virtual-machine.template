@@ -1,0 +1,14 @@
+qemu-system-x86_64 \
+    -m ${RAM} \
+    -smp ${CPUS} \
+    -cpu qemu64 \
+    -enable-kvm \
+    -machine type=pc,accel=kvm \
+    -drive file=${HARD_DRIVE},format=qcow2,if=virtio \
+    -netdev user,id=network0,hostfwd=tcp::${HOST_SSH_PORT}-:22,dns=8.8.8.8 \
+    -device virtio-net,netdev=network0 \
+    -vga virtio \
+    -display gtk \
+    -boot c \
+    -boot menu=on
+
