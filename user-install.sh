@@ -24,13 +24,11 @@ mkdir /home/$USER/project
 mkdir /home/$USER/workspace 
 mkdir /home/$USER/.config 
 mkdir /home/$USER/.local
-# mkdir /home/$USER/.xmonad
 mkdir /home/$USER/.ssh
 mkdir /home/$USER/.config/terminator
 mkdir /home/$USER/.config/leftwm
 mkdir /home/$USER/.config/gtk-3.0
 
-# ln -s $SCRIPT_ABSOLUTE_DIR_PATH/xmonad.hs /home/$USER/.xmonad/xmonad.hs
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.xinitrc /home/$USER/.xinitrc
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.alacritty.toml $HOME/.alacritty.toml
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.zshrc /home/$USER/.zshrc 
@@ -45,7 +43,9 @@ ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.sqlfluff /home/$USER/.sqlfluff
 
 git clone https://aur.archlinux.org/yay.git ~/AUR/yay
 cd ~/AUR/yay && makepkg -si --noconfirm
+
 yay -S spotify ranger fastfetch natscli --noconfirm
+
 if [ "$INSTALL_LEFT" = true ]; then 
    $SCRIPT_ABSOLUTE_DIR_PATH/install-leftmw.sh
 fi
