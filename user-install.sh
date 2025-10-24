@@ -87,16 +87,16 @@ set_up_home_dir(){
 set_up_configuration_files(){
 	log "Setting up configuration file symlinks..."
 	
-	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/.xinitrc $HOME/.xinitrc \
+	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/config-files/.xinitrc $HOME/.xinitrc \
 		|| warning "Failed to create .xinitrc symlink"
 
-	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/.alacritty.toml $HOME/.alacritty.toml \
+	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/config-files/.alacritty.toml $HOME/.alacritty.toml \
 		|| warning "Failed to create .alacritty.toml symlink"
 
-	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/.zshrc $HOME/.zshrc \
+	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/config-files/.zshrc $HOME/.zshrc \
 		|| warning "Failed to create .zshrc symlink"
 
-	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/prompt.sh $HOME/prompt.sh \
+	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/config-files/prompt.sh $HOME/prompt.sh \
 		|| warning "Failed to create prompt.sh symlink"
 
 	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/picom $HOME/.config/picom \
@@ -105,19 +105,19 @@ set_up_configuration_files(){
 	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/wallpaper $HOME/.local/wallpaper \
 		|| warning "Failed to create wallpaper symlink"
 
-	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/.Xresources $HOME/.Xresources \
+	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/config-files/.Xresources $HOME/.Xresources \
 		|| warning "Failed to create .Xresources symlink"
 
-	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/.fzfrc $HOME/.fzfrc \
+	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/config-files/.fzfrc $HOME/.fzfrc \
 		|| warning "Failed to create .fzfrc symlink"
 
 	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/terminator/config $HOME/.config/terminator/config \
 		|| warning "Failed to create terminator config symlink"
 
-	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/gtk.css $HOME/.config/gtk-3.0/gtk.css \
+	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/config-files/gtk.css $HOME/.config/gtk-3.0/gtk.css \
 		|| warning "Failed to create gtk.css symlink"
 
-	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/.sqlfluff $HOME/.sqlfluff \
+	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/config-files/.sqlfluff $HOME/.sqlfluff \
 		|| warning "Failed to create .sqlfluff symlink"
 	
 	log "Cloning neovim configuration..."

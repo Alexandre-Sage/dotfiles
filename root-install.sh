@@ -141,7 +141,7 @@ configure_zsh() {
 		|| warning "Failed to clone zsh-vi-mode"
 
 	log "Creating ZSH symlinks for root user..."
-	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/.zshrc /root/.zshrc || error "Failed to create .zshrc symlink"
+	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/config-files/.zshrc /root/.zshrc || error "Failed to create .zshrc symlink"
 	
 	log "Setting ZSH as default shell for root..."
 	chsh -s /bin/zsh || error "Failed to change shell to ZSH"
@@ -179,13 +179,13 @@ configure_groups_and_permissions() {
 set_up_config_files() {
 	log "Setting up configuration file symlinks for root..."
 	
-	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/.xinitrc /root/.xinitrc \
+	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/config-files/.xinitrc /root/.xinitrc \
 		|| warning "Failed to create .xinitrc symlink"
 
-	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/.Xresources /root/.Xresources \
+	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/config-files/.Xresources /root/.Xresources \
 		|| warning "Failed to create .Xresources symlink"
 
-	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/.fzfrc /root/.fzfrc \
+	ln -sf $SCRIPT_ABSOLUTE_DIR_PATH/config-files/.fzfrc /root/.fzfrc \
 		|| warning "Failed to create .fzfrc symlink"
 	
 	log "Configuration files symlinked successfully"
