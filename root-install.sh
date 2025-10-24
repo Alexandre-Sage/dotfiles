@@ -15,6 +15,7 @@ virtual_box=false
 install_grub=false
 groups="wheel,docker"
 password="root"
+qemu=false
 while getopts "u:p:dvg" opt; do
   case "$opt" in
 	u)
@@ -30,6 +31,9 @@ while getopts "u:p:dvg" opt; do
 	  virtual_box=true
 	  groups+=",vboxsf"
 	  ;;
+	q)
+		qemu=true
+		;;
 	g) 
 	  install_grub=true
 	  ;;
@@ -45,6 +49,8 @@ fi
 if $install_grub; then 
   if $virtual_box; then 
 	 grub-install --target="i386-pc" /dev/sda
+  elif $qemu;then
+	 grub-install --target="i386-pc" /dev/vda
   else
   	 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --recheck
   fi
@@ -70,7 +76,6 @@ echo "KEYMAP=fr" >> /etc/vconsole.conf
 
 chsh -s /bin/zsh
 
-ln -s $SCRIPT_ABSOLUTE_DIR_PATH/xmonad.hs /root/.xmonad/xmonad.hs
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.xinitrc /root/.xinitrc
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.zshrc /root/.zshrc 
 ln -s $SCRIPT_ABSOLUTE_DIR_PATH/.Xresources /root/.Xresources 
