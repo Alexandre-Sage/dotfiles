@@ -34,7 +34,6 @@ npm
 openssh
 openssl
 pavucontrol
-picom
 pulseaudio
 pulseaudio-alsa
 ripgrep
@@ -49,11 +48,6 @@ ttf-hack-nerd
 ttf-terminus-nerd
 unzip
 wpa_supplicant
-xclip
-xorg-apps
-xorg-server
-xorg-xinit
-xterm
 zip
 zsh
 dunst

@@ -3,6 +3,7 @@
 SCRIPT_ABSOLUTE_DIR_PATH=$(pwd)
 ZSH_PLUGINS_DIR=/usr/share/zsh/plugins
 GIT_HUB_URL=https://github.com
+PACKAGES_DIR="$SCRIPT_ABSOLUTE_DIR_PATH/packages"
 source "$SCRIPT_ABSOLUTE_DIR_PATH/helpers/log.sh"
 
 show_help() {
@@ -48,8 +49,10 @@ install_grub=false
 groups="wheel,docker"
 password="root"
 qemu=false
+install_wayland=false
+install_xorg=false
 
-while getopts "u:p:dvqgh" opt; do
+while getopts "u:p:dvqghwx" opt; do
   case "$opt" in
 	u)
 	  user="$OPTARG"
@@ -70,6 +73,12 @@ while getopts "u:p:dvqgh" opt; do
 	g) 
 	  install_grub=true
 	  ;;
+	x)
+	  install_xorg=true
+	  ;;
+	w)
+	  install_wayland=true;
+	  ;;
 	h)
 	  show_help
 	  exit 0
@@ -85,8 +94,16 @@ done
 install_packages() {
 	log "Installing packages..."
 	pacman -Syy || error "Failed to sync package databases"
-	pacman -S --needed --noconfirm - < ./packages \
-		|| error "Failed to install packages from ./packages"
+	pacman -S --needed --noconfirm - < "$PACKAGES_DIR/root-packages" \
+		|| error "Failed to install packages from root-packages"
+
+	if $install_wayland;then 
+		pacman -S --needed --noconfirm - < "$PACKAGES_DIR/wayland-packages"
+	fi
+
+	if $install_xorg;then 
+		pacman -S --needed --noconfirm - < "$PACKAGES_DIR/xorg-packages"
+	fi
 	
 	if $virtual_box; then
 		log "Installing VirtualBox guest utilities..."

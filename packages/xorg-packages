@@ -1,0 +1,9 @@
+xclip
+xorg-apps
+xorg-server
+xorg-xinit
+xorg-xrandr
+xf86-video-qxl
+xf86-video-fbdev
+xterm
+picom

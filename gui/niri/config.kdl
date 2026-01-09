@@ -1,0 +1,147 @@
+// Niri configuration translated from LeftWM config
+// Niri uses KDL (KDL Document Language) format
+
+// Input configuration
+input {
+    keyboard {
+        xkb {
+            layout "fr"
+        }
+    }
+    
+    touchpad {
+        tap
+        natural-scroll
+    }
+    
+    focus-follows-mouse
+}
+
+// Appearance
+layout {
+    gaps 16
+    center-focused-column "never"
+    
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+    
+    default-column-width { proportion 0.5; }
+    
+    focus-ring {
+        width 4
+        active-color 128 0 255 255  // Purple (0.5, 0.0, 1.0, 1.0)
+        inactive-color 80 80 80 255
+    }
+    
+    border {
+        off
+    }
+}
+
+// Workspaces (Niri uses named workspaces)
+workspace "1"
+workspace "2"
+workspace "3"
+workspace "4"
+workspace "5"
+workspace "6"
+workspace "7"
+workspace "8"
+workspace "9"
+
+// Window rules
+window-rule {
+    match app-id="DBeaver"
+    match title="Connect to a database"
+    fullscreen true
+}
+
+// Prefer to use native Wayland
+prefer-no-csd
+
+// Keybindings
+binds {
+    // Mod key is Alt (Mod1 in X11)
+    // Note: Niri uses "Mod" for Super/Windows key, "Alt" for Alt key
+    
+    // Volume controls
+    F12 { spawn "amixer" "-q" "sset" "Master" "5%+"; }
+    F11 { spawn "amixer" "-q" "sset" "Master" "5%-"; }
+    F9 { spawn "pavucontrol"; }
+    
+    // Application launcher
+    Alt+P { spawn "dmenu_run" "-l" "15"; }
+    
+    // Screenshots
+    Print { spawn "sh" "-c" "grim ~/screenshot/$(date '+%Y-%m-%d_%H-%M-%S').png"; }
+    
+    // Application shortcuts
+    Alt+T { spawn "alacritty"; }
+    Alt+F { spawn "firefox"; }
+    Alt+Shift+F { spawn "alacritty" "-e" "yazi"; }
+    
+    // Window management
+    Alt+Shift+C { close-window; }
+    Alt+Shift+R { spawn "niri" "msg" "action" "reload-config"; }
+    
+    // Focus movement
+    Alt+K { focus-column-or-monitor-up; }
+    Alt+J { focus-column-or-monitor-down; }
+    Alt+H { focus-column-left; }
+    Alt+L { focus-column-right; }
+    Alt+Up { focus-column-or-monitor-up; }
+    Alt+Down { focus-column-or-monitor-down; }
+    Alt+Tab { focus-workspace-next; }
+    
+    // Window movement
+    Alt+Shift+K { move-column-up; }
+    Alt+Shift+J { move-column-down; }
+    Alt+Shift+H { move-column-left; }
+    Alt+Shift+L { move-column-right; }
+    Alt+Shift+Up { move-column-up; }
+    Alt+Shift+Down { move-column-down; }
+    Alt+Return { move-column-to-first; }
+    
+    // Column width adjustment
+    Alt+Shift+L { set-column-width "+5%"; }
+    Alt+Shift+H { set-column-width "-5%"; }
+    
+    // Layout controls
+    Alt+Space { switch-preset-column-width; }
+    Alt+M { fullscreen-window; }
+    Alt+U { fullscreen-window; }
+    Alt+E { maximize-column; }
+    
+    // Workspace navigation (AZERTY keyboard layout)
+    Alt+Ampersand { focus-workspace 1; }      // &
+    Alt+Eacute { focus-workspace 2; }         // é
+    Alt+QuoteDbl { focus-workspace 3; }       // "
+    Alt+Apostrophe { focus-workspace 4; }     // '
+    Alt+ParenLeft { focus-workspace 5; }      // (
+    Alt+Minus { focus-workspace 6; }          // -
+    Alt+Egrave { focus-workspace 7; }         // è
+    Alt+Underscore { focus-workspace 8; }     // _
+    Alt+Ccedilla { focus-workspace 9; }       // ç
+    
+    // Move windows to workspaces (AZERTY)
+    Alt+Shift+Ampersand { move-column-to-workspace 1; }
+    Alt+Shift+Eacute { move-column-to-workspace 2; }
+    Alt+Shift+QuoteDbl { move-column-to-workspace 3; }
+    Alt+Shift+Apostrophe { move-column-to-workspace 4; }
+    Alt+Shift+ParenLeft { move-column-to-workspace 5; }
+    Alt+Shift+Minus { move-column-to-workspace 6; }
+    Alt+Shift+Egrave { move-column-to-workspace 7; }
+    Alt+Shift+Underscore { move-column-to-workspace 8; }
+    Alt+Shift+Ccedilla { move-column-to-workspace 9; }
+}
+
+// Startup applications
+spawn-at-startup "waybar"
+
+// Debug options (disable in production)
+debug {
+    render-drm-device "/dev/dri/renderD128"
+}

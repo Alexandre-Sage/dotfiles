@@ -1,0 +1,14 @@
+wayland
+wayland-protocols
+wl-clipboard
+sway
+swayidle
+swaylock
+waybar
+wofi
+grim
+slurp
+mako
+xdg-desktop-portal-wlr
+qt5-wayland
+qt6-wayland
