@@ -13,6 +13,7 @@ OPTIONS:
     -m EMAIL       Set git email address (default: your_email@example.com)
     -l             Install LeftWM window manager
     -h             Display this help message
+    -H             Install wayland
 
 EXAMPLES:
     $(basename "$0") -m user@example.com -l
@@ -27,6 +28,7 @@ EOF
 NATS_TOKEN=$(openssl rand -base64 16)
 REDIS_TOKEN=$(openssl rand -base64 16)
 INSTALL_LEFT=false
+INSTALL_HYPRLAND=false
 git_mail="your_email@example.com"
 
 
@@ -38,6 +40,9 @@ while getopts "m:lh" opt; do
 	l)
 	  INSTALL_LEFT=true
 	;;
+        H)
+	  INSTALL_HYPRLAND=true
+	  ;;
 	h)
 	  show_help
 	  exit 0
@@ -155,6 +160,9 @@ install_gui(){
 			|| error "Failed to install LeftWM"
 
 		log "LeftWM installation completed"
+	elif [[ "$INSTALL_HYPRLAND" = true ]]; then
+	        log "Installing hyprland"	
+		$SCRIPT_ABSOLUTE_DIR_PATH/gui/install-hyprland.sh || error "Failed to install hyprland"
 	else
 		log "Skipping LeftWM installation (not requested)"
 	fi
